@@ -7,10 +7,10 @@ const App: FunctionComponent = () => (
   <SafeAreaView>
     <View style={styles.container}>
       <Text style={styles.intro}>Here are some boxes of different colours</Text>
-      <ColorBox colorStyle={styles.cyan}>Cyan #2aa198</ColorBox>
-      <ColorBox colorStyle={styles.blue}>Blue #268bd2</ColorBox>
-      <ColorBox colorStyle={styles.magenta}>Magenta #d33682</ColorBox>
-      <ColorBox colorStyle={styles.orange}>Orange #cb4b16</ColorBox>
+      <ColorBox colorName="Cyan" hexCode="#2aa198" />
+      <ColorBox colorName="Blue" hexCode="#268bd2" />
+      <ColorBox colorName="Magenta" hexCode="#d33682" />
+      <ColorBox colorName="Orange" hexCode="#cb4b16" />
     </View>
   </SafeAreaView>
 );
@@ -24,17 +24,5 @@ const styles = StyleSheet.create({
   intro: {
     fontSize: 18,
     fontWeight: 'bold',
-  },
-  cyan: {
-    backgroundColor: '#2aa198',
-  },
-  blue: {
-    backgroundColor: '#268bd2',
-  },
-  magenta: {
-    backgroundColor: '#d33682',
-  },
-  orange: {
-    backgroundColor: '#cb4b16',
   },
 });

@@ -1,14 +1,22 @@
 import React, { FunctionComponent } from 'react';
-import { StyleSheet, Text, View, ViewStyle } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
-const ColorBox: FunctionComponent<{ colorStyle: ViewStyle }> = ({
-  children,
-  colorStyle,
-}) => (
-  <View style={[styles.colorBox, colorStyle]}>
-    <Text style={styles.boxText}>{children}</Text>
-  </View>
-);
+const ColorBox: FunctionComponent<{ colorName: string; hexCode: string }> = ({
+  colorName,
+  hexCode,
+}) => {
+  const background = {
+    backgroundColor: hexCode,
+  };
+
+  return (
+    <View style={[styles.colorBox, background]}>
+      <Text style={styles.boxText}>
+        {colorName} {hexCode}
+      </Text>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   colorBox: {
