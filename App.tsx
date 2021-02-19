@@ -25,16 +25,15 @@ const App: FunctionComponent = () => {
 
   return (
     <SafeAreaView>
-      <View style={styles.container}>
-        <Text style={styles.intro}>
-          Here are some boxes of different colours
-        </Text>
-        <FlatList
-          data={colorData}
-          renderItem={({ item }) => <ColorBox {...item} />}
-          keyExtractor={(item) => item.hexCode}
-        />
-      </View>
+      <FlatList
+        data={colorData}
+        renderItem={({ item }) => <ColorBox {...item} />}
+        keyExtractor={(item) => item.hexCode}
+        ListHeaderComponent={() => (
+          <Text style={styles.heading}>Solarized</Text>
+        )}
+        style={styles.list}
+      />
     </SafeAreaView>
   );
 };
@@ -42,10 +41,10 @@ const App: FunctionComponent = () => {
 export default App;
 
 const styles = StyleSheet.create({
-  container: {
+  list: {
     padding: 15,
   },
-  intro: {
+  heading: {
     fontSize: 18,
     fontWeight: 'bold',
   },
