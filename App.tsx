@@ -2,10 +2,11 @@ import React, { FunctionComponent } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
+import { RootStackParamList } from './RootStackParamList';
 import Home from './screens/Home';
 import ColorPalette from './screens/ColorPalette';
 
-const Stack = createStackNavigator();
+const Stack = createStackNavigator<RootStackParamList>();
 
 const App: FunctionComponent = () => (
   <NavigationContainer>
