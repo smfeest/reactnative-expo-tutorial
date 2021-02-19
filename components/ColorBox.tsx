@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TextStyle, View } from 'react-native';
 
 const ColorBox: FunctionComponent<{ colorName: string; hexCode: string }> = ({
   colorName,
@@ -9,9 +9,13 @@ const ColorBox: FunctionComponent<{ colorName: string; hexCode: string }> = ({
     backgroundColor: hexCode,
   };
 
+  const textColor: TextStyle = {
+    color: parseInt(hexCode.substr(1), 16) > 0xffffff * 0.9 ? '#000' : '#fff',
+  };
+
   return (
     <View style={[styles.colorBox, background]}>
-      <Text style={styles.boxText}>
+      <Text style={[styles.boxText, textColor]}>
         {colorName} {hexCode}
       </Text>
     </View>
@@ -25,7 +29,6 @@ const styles = StyleSheet.create({
     padding: 5,
   },
   boxText: {
-    color: '#fff',
     fontWeight: 'bold',
     textAlign: 'center',
   },
