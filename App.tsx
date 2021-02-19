@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { FlatList, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
 
 import ColorBox from './components/ColorBox';
 
@@ -25,15 +26,17 @@ const App: FunctionComponent = () => {
 
   return (
     <SafeAreaView>
-      <FlatList
-        data={colorData}
-        renderItem={({ item }) => <ColorBox {...item} />}
-        keyExtractor={(item) => item.hexCode}
-        ListHeaderComponent={() => (
-          <Text style={styles.heading}>Solarized</Text>
-        )}
-        style={styles.list}
-      />
+      <NavigationContainer>
+        <FlatList
+          data={colorData}
+          renderItem={({ item }) => <ColorBox {...item} />}
+          keyExtractor={(item) => item.hexCode}
+          ListHeaderComponent={() => (
+            <Text style={styles.heading}>Solarized</Text>
+          )}
+          style={styles.list}
+        />
+      </NavigationContainer>
     </SafeAreaView>
   );
 };
