@@ -42,10 +42,11 @@ export default App;
 
 const styles = StyleSheet.create({
   list: {
-    padding: 15,
+    paddingHorizontal: 15,
   },
   heading: {
     fontSize: 18,
     fontWeight: 'bold',
+    marginBottom: 15,
   },
 });

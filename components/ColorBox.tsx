@@ -25,7 +25,7 @@ const ColorBox: FunctionComponent<{ colorName: string; hexCode: string }> = ({
 const styles = StyleSheet.create({
   colorBox: {
     borderRadius: 3,
-    marginTop: 10,
+    marginBottom: 10,
     padding: 5,
   },
   boxText: {
