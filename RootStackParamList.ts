@@ -1,4 +1,4 @@
-import { Palette } from './ColorPalettes';
+import { Palette } from './Palette';
 
 export type RootStackParamList = {
   Home: undefined;
