@@ -16,6 +16,7 @@ const Home: FunctionComponent<{
   navigation: NavigationProp<RootStackParamList>;
 }> = ({ navigation: { navigate } }) => {
   const [palettes, setPalettes] = useState<Palette[]>([]);
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
   const fetchPalettes = useCallback(async () => {
     const response = await fetch(
@@ -28,6 +29,15 @@ const Home: FunctionComponent<{
     fetchPalettes();
   }, [fetchPalettes]);
 
+  const refresh = useCallback(async () => {
+    try {
+      setIsRefreshing(true);
+      await fetchPalettes();
+    } finally {
+      setIsRefreshing(false);
+    }
+  }, [setIsRefreshing, fetchPalettes]);
+
   return (
     <FlatList
       data={palettes}
@@ -37,6 +47,8 @@ const Home: FunctionComponent<{
         </TouchableOpacity>
       )}
       keyExtractor={({ paletteName }) => paletteName}
+      refreshing={isRefreshing}
+      onRefresh={refresh}
       style={styles.list}
     />
   );
