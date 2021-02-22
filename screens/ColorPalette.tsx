@@ -1,36 +1,27 @@
+import { RouteProp } from '@react-navigation/native';
 import React, { FunctionComponent } from 'react';
 import { FlatList, StyleSheet, Text } from 'react-native';
 
 import ColorBox from '../components/ColorBox';
+import { RootStackParamList } from '../RootStackParamList';
 
-const colorData = [
-  { colorName: 'Base03', hexCode: '#002b36' },
-  { colorName: 'Base02', hexCode: '#073642' },
-  { colorName: 'Base01', hexCode: '#586e75' },
-  { colorName: 'Base00', hexCode: '#657b83' },
-  { colorName: 'Base0', hexCode: '#839496' },
-  { colorName: 'Base1', hexCode: '#93a1a1' },
-  { colorName: 'Base2', hexCode: '#eee8d5' },
-  { colorName: 'Base3', hexCode: '#fdf6e3' },
-  { colorName: 'Yellow', hexCode: '#b58900' },
-  { colorName: 'Orange', hexCode: '#cb4b16' },
-  { colorName: 'Red', hexCode: '#dc322f' },
-  { colorName: 'Magenta', hexCode: '#d33682' },
-  { colorName: 'Violet', hexCode: '#6c71c4' },
-  { colorName: 'Blue', hexCode: '#268bd2' },
-  { colorName: 'Cyan', hexCode: '#2aa198' },
-  { colorName: 'Green', hexCode: '#859900' },
-];
+const ColorPalette: FunctionComponent<{
+  route: RouteProp<RootStackParamList, 'ColorPalette'>;
+}> = ({ route }) => {
+  const { paletteName, colors } = route.params;
 
-const ColorPalette: FunctionComponent = () => (
-  <FlatList
-    data={colorData}
-    renderItem={({ item }) => <ColorBox {...item} />}
-    keyExtractor={({ hexCode }) => hexCode}
-    ListHeaderComponent={() => <Text style={styles.heading}>Solarized</Text>}
-    style={styles.list}
-  />
-);
+  return (
+    <FlatList
+      data={colors}
+      renderItem={({ item }) => <ColorBox {...item} />}
+      keyExtractor={({ hexCode }) => hexCode}
+      ListHeaderComponent={() => (
+        <Text style={styles.heading}>{paletteName}</Text>
+      )}
+      style={styles.list}
+    />
+  );
+};
 
 export default ColorPalette;
 
