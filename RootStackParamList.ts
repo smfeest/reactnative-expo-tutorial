@@ -1,6 +1,6 @@
-import { PaletteColor } from './ColorPalettes';
+import { Palette } from './ColorPalettes';
 
 export type RootStackParamList = {
   Home: undefined;
-  ColorPalette: { paletteName: string; colors: PaletteColor[] };
+  ColorPalette: Palette;
 };
