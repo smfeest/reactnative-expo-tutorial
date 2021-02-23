@@ -1,5 +1,6 @@
 import { StackNavigationProp } from '@react-navigation/stack';
 import React, { FunctionComponent, useCallback, useState } from 'react';
+import { Alert } from 'react-native';
 import {
   Button,
   FlatList,
@@ -32,19 +33,29 @@ const CreatePaletteModal: FunctionComponent<{
     [setSelectedColors]
   );
 
-  const handleSubmit = useCallback(
-    () =>
-      navigate('Main', {
-        screen: 'Home',
-        params: {
-          newPalette: {
-            paletteName,
-            colors: COLORS.filter(({ hexCode }) => selectedColors.has(hexCode)),
-          },
+  const handleSubmit = useCallback(() => {
+    if (!paletteName) {
+      Alert.alert('Name required', 'Please give your new color palette a name');
+      return;
+    }
+    if (selectedColors.size < 3) {
+      Alert.alert(
+        'More colors required',
+        'Please select at least three colors'
+      );
+      return;
+    }
+
+    navigate('Main', {
+      screen: 'Home',
+      params: {
+        newPalette: {
+          paletteName,
+          colors: COLORS.filter(({ hexCode }) => selectedColors.has(hexCode)),
         },
-      }),
-    [paletteName, selectedColors, navigate]
-  );
+      },
+    });
+  }, [paletteName, selectedColors, navigate]);
 
   return (
     <View style={styles.container}>
