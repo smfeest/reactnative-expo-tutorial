@@ -1,6 +1,6 @@
 import { Palette } from './Palette';
 
 export type MainStackParamList = {
-  Home: undefined;
+  Home: { newPalette?: Palette };
   ColorPalette: Palette;
 };

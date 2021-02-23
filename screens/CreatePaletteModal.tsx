@@ -1,10 +1,22 @@
+import { StackNavigationProp } from '@react-navigation/stack';
 import React, { FunctionComponent, useCallback, useState } from 'react';
-import { FlatList, StyleSheet, Text, TextInput, View } from 'react-native';
+import {
+  Button,
+  FlatList,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from 'react-native';
 
 import { COLORS } from '../Colors';
 import ColorToggle from '../components/ColorToggle';
+import { Palette } from '../Palette';
+import { RootStackParamList } from '../RootStackParamList';
 
-const CreatePaletteModal: FunctionComponent = () => {
+const CreatePaletteModal: FunctionComponent<{
+  navigation: StackNavigationProp<RootStackParamList, 'CreatePalette'>;
+}> = ({ navigation: { navigate } }) => {
   const [paletteName, setPaletteName] = useState('');
   const [selectedColors, setSelectedColors] = useState(new Set<string>());
 
@@ -18,6 +30,20 @@ const CreatePaletteModal: FunctionComponent = () => {
         return newColors;
       }),
     [setSelectedColors]
+  );
+
+  const handleSubmit = useCallback(
+    () =>
+      navigate('Main', {
+        screen: 'Home',
+        params: {
+          newPalette: {
+            paletteName,
+            colors: COLORS.filter(({ hexCode }) => selectedColors.has(hexCode)),
+          },
+        },
+      }),
+    [paletteName, selectedColors, navigate]
   );
 
   return (
@@ -42,6 +68,9 @@ const CreatePaletteModal: FunctionComponent = () => {
         extraData={selectedColors}
         keyExtractor={({ hexCode }) => hexCode}
       />
+      <View style={styles.buttonContainer}>
+        <Button onPress={handleSubmit} title="Add palette" />
+      </View>
     </View>
   );
 };
@@ -58,10 +87,13 @@ const styles = StyleSheet.create({
     borderColor: '#aaa',
     borderRadius: 3,
     borderWidth: 1,
-    flexShrink: 1,
     height: 40,
     marginHorizontal: 15,
     paddingHorizontal: 10,
+  },
+  buttonContainer: {
+    marginHorizontal: 15,
+    paddingVertical: 10,
   },
 });
 

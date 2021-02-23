@@ -11,7 +11,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { CompositeNavigationProp } from '@react-navigation/native';
+import { CompositeNavigationProp, RouteProp } from '@react-navigation/native';
 
 import { Palette } from '../Palette';
 import { MainStackParamList } from '../MainStackParamList';
@@ -27,20 +27,37 @@ type HomeNavigationProp = CompositeNavigationProp<
 
 const Home: FunctionComponent<{
   navigation: HomeNavigationProp;
-}> = ({ navigation: { navigate } }) => {
+  route: RouteProp<MainStackParamList, 'Home'>;
+}> = ({ navigation: { navigate }, route }) => {
+  const newPalette = route.params?.newPalette;
+
   const [palettes, setPalettes] = useState<Palette[]>([]);
+  const [remotePalettes, setRemotePalettes] = useState<Palette[]>([]);
+  const [localPalettes, setLocalPalettes] = useState<Palette[]>([]);
   const [isRefreshing, setIsRefreshing] = useState(false);
 
   const fetchPalettes = useCallback(async () => {
     const response = await fetch(
       'https://color-palette-api.kadikraman.now.sh/palettes'
     );
-    setPalettes(await response.json());
-  }, []);
+    setRemotePalettes(await response.json());
+  }, [setRemotePalettes]);
 
   useEffect(() => {
     fetchPalettes();
   }, [fetchPalettes]);
+
+  useEffect(() => {
+    if (newPalette) {
+      setLocalPalettes((oldPalettes) => oldPalettes.concat(newPalette));
+    }
+  }, [setLocalPalettes, newPalette]);
+
+  useEffect(() => setPalettes(remotePalettes.concat(localPalettes)), [
+    setPalettes,
+    remotePalettes,
+    localPalettes,
+  ]);
 
   const refresh = useCallback(async () => {
     try {
