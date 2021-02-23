@@ -3,10 +3,10 @@ import React, { FunctionComponent } from 'react';
 import { FlatList, StyleSheet } from 'react-native';
 
 import ColorBox from '../components/ColorBox';
-import { RootStackParamList } from '../RootStackParamList';
+import { MainStackParamList } from '../MainStackParamList';
 
 const ColorPalette: FunctionComponent<{
-  route: RouteProp<RootStackParamList, 'ColorPalette'>;
+  route: RouteProp<MainStackParamList, 'ColorPalette'>;
 }> = ({ route }) => {
   const { colors } = route.params;
 

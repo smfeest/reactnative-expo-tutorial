@@ -8,12 +8,12 @@ import { FlatList, StyleSheet, TouchableOpacity } from 'react-native';
 import { NavigationProp } from '@react-navigation/native';
 
 import { Palette } from '../Palette';
-import { RootStackParamList } from '../RootStackParamList';
+import { MainStackParamList } from '../MainStackParamList';
 
 import PalettePreview from '../components/PalettePreview';
 
 const Home: FunctionComponent<{
-  navigation: NavigationProp<RootStackParamList>;
+  navigation: NavigationProp<MainStackParamList>;
 }> = ({ navigation: { navigate } }) => {
   const [palettes, setPalettes] = useState<Palette[]>([]);
   const [isRefreshing, setIsRefreshing] = useState(false);

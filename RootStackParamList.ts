@@ -1,6 +1,6 @@
-import { Palette } from './Palette';
+import { NavigatorScreenParams } from '@react-navigation/native';
+import { MainStackParamList } from './MainStackParamList';
 
 export type RootStackParamList = {
-  Home: undefined;
-  ColorPalette: Palette;
+  Main: NavigatorScreenParams<MainStackParamList>;
 };
