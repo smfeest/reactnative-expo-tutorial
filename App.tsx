@@ -2,6 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
+import CreatePaletteModal from './screens/CreatePaletteModal';
 import MainStack from './screens/MainStack';
 import { RootStackParamList } from './RootStackParamList';
 
@@ -14,6 +15,11 @@ const App: FunctionComponent = () => (
         name="Main"
         component={MainStack}
         options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="CreatePalette"
+        component={CreatePaletteModal}
+        options={{ title: 'New color palette' }}
       />
     </Stack.Navigator>
   </NavigationContainer>

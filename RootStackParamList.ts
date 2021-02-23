@@ -3,4 +3,5 @@ import { MainStackParamList } from './MainStackParamList';
 
 export type RootStackParamList = {
   Main: NavigatorScreenParams<MainStackParamList>;
+  CreatePalette: undefined;
 };
